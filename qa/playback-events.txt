@@ -1,0 +1,10 @@
+seeking 33.657
+seeked 33.657
+seeking 0.650
+play 0.650
+seeked 0.651
+pause 33.657
+seeking 13.177
+seeked 13.177
+play 13.186
+pause 17.514

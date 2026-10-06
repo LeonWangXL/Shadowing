@@ -1,0 +1,58 @@
+[
+  {
+    "id": "s1",
+    "start": 0.65,
+    "end": 4.044,
+    "text": "I used to think progress had to be dramatic.",
+    "translation": "我曾以为，进步必须是巨大的。"
+  },
+  {
+    "id": "s2",
+    "start": 4.694,
+    "end": 8.738,
+    "text": "But over time, I realized that's not true.",
+    "translation": "但慢慢地，我发现并非如此。"
+  },
+  {
+    "id": "s3",
+    "start": 9.388,
+    "end": 12.527,
+    "text": "Small steps make a big difference.",
+    "translation": "小小的进步也能带来巨大的改变。"
+  },
+  {
+    "id": "s4",
+    "start": 13.177,
+    "end": 16.511,
+    "text": "You don't have to be perfect to move forward.",
+    "translation": "你不必做到完美，才能继续前行。"
+  },
+  {
+    "id": "s5",
+    "start": 17.161,
+    "end": 20.95,
+    "text": "What matters is showing up, again and again.",
+    "translation": "重要的是，一次又一次地付诸行动。"
+  },
+  {
+    "id": "s6",
+    "start": 21.6,
+    "end": 24.809,
+    "text": "Each little effort builds your confidence.",
+    "translation": "每一点努力，都在积累你的信心。"
+  },
+  {
+    "id": "s7",
+    "start": 25.459,
+    "end": 28.448,
+    "text": "And confidence helps you go further.",
+    "translation": "而信心，会让你走得更远。"
+  },
+  {
+    "id": "s8",
+    "start": 29.098,
+    "end": 33.157,
+    "text": "So be patient with yourself, and keep going.",
+    "translation": "所以，对自己多一点耐心，坚持下去。"
+  }
+]

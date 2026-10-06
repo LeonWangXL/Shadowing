@@ -1,0 +1,24 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+
+# Local package caches
+.npm-cache/
+
+# Local credentials and environment settings
+.env
+.env.*
+!.env.example
+
+# Generated demo intermediates
+public/demo-clips/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
