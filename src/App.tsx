@@ -298,7 +298,7 @@ export function App() {
   function onTimeUpdate() {
     const element = media.current; if (!element) return;
     setPosition(element.currentTime);
-    if (!practice.busy && !element.paused && lesson) { const found = lesson.segments.findIndex(s => element.currentTime >= s.start && element.currentTime < s.end); if (found >= 0 && found !== index) { setIndex(found); setSelectedAttemptId(''); } }
+    if (!practice.busy && !element.paused && lesson) { const found = lesson.segments.findIndex(s => element.currentTime >= s.start && element.currentTime < s.end); if (found >= 0 && unit && found > unit.lastIndex && element.currentTime >= unit.end) { setIndex(unit.lastIndex + 1); setSelectedAttemptId(''); } }
   }
   function seekPosition(time: number) {
     if (practice.busy || !media.current || !lesson) return;
@@ -311,7 +311,7 @@ export function App() {
     if (!element.paused) element.pause(); else { pauseRecordings(); try { await element.play(); } catch { notify('播放失败，请检查素材是否为浏览器支持的格式。'); } }
   }
   const phaseLabels = { idle: '开始跟读', waiting: '开始录音', preparing: '准备麦克风…', listening: '停止播放', recording: '结束录音', saving: '正在保存…', break: '准备下一遍' };
-  const videoCaption = settings.groupSize > 1 && practice.busy && lesson ? lesson.segments.slice(index, (unit?.lastIndex ?? index) + 1).find(item => position >= item.start && position < item.end)?.text || '' : segment?.text;
+  const videoCaption = settings.groupSize > 1 && lesson ? lesson.segments.slice(index, (unit?.lastIndex ?? index) + 1).find(item => position >= item.start && position < item.end)?.text || '' : segment?.text;
   const progressStep = practice.phase === 'listening' ? 0 : practice.phase === 'recording' || practice.phase === 'preparing' ? 1 : selectedAttempt ? 2 : 0;
 
   return <>

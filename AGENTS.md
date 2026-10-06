@@ -35,3 +35,5 @@ Source-waveform comparisons must never fetch the whole source into an ArrayBuffe
 Practice range must include a custom contiguous cue count in addition to presets. Preserve custom counts across reloads, validate positive integers and clamp groups at the final cue. Source waveform sampling must establish its render-clock anchor before allowing audio processing, so startup samples are not discarded. Test immediate onset, real leading silence and nonzero start offsets.
 
 Offer manual listen-then-record mode: after each source playback wait indefinitely for explicit start-recording input, including repeated/group/auto-next rounds. Waiting must not capture microphone samples or consume recording duration; cancellation must not create an empty attempt. Preserve automatic listen mode.
+
+During continuous playback, keep the selected practice group and its full text stable until the last cue finishes. Only then advance to the next group; the player subtitle may follow individual cues without changing group selection. Explicit user selection remains immediate.
