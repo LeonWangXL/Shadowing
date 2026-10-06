@@ -37,3 +37,5 @@ Practice range must include a custom contiguous cue count in addition to presets
 Offer manual listen-then-record mode: after each source playback wait indefinitely for explicit start-recording input, including repeated/group/auto-next rounds. Waiting must not capture microphone samples or consume recording duration; cancellation must not create an empty attempt. Preserve automatic listen mode.
 
 During continuous playback, keep the selected practice group and its full text stable until the last cue finishes. Only then advance to the next group; the player subtitle may follow individual cues without changing group selection. Explicit user selection remains immediate.
+
+Maintain Chinese and English versions of the README and user manual, with reciprocal language links. Keep operational rules, limits and numbered screenshot explanations consistent across both languages. The repository is https://github.com/LeonWangXL/Shadowing.
