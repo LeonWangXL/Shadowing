@@ -209,6 +209,7 @@ export function App() {
   }, [index, lessonId, ready]);
 
   async function refreshService() {
+    if (import.meta.env.VITE_STATIC_HOST === 'true') { setService({ configured: false, prosody: false, reachable: false }); return; }
     try { const response = await fetch(appUrl('api/health')); if (!response.ok) throw new Error(); const data = await response.json(); setService({ configured: !!data.configured, prosody: !!data.prosody, reachable: true }); }
     catch { setService({ configured: false, prosody: false, reachable: false }); }
   }

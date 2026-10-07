@@ -1,0 +1,38 @@
+import { createRequire } from 'node:module';
+import assert from 'node:assert/strict';
+const require = createRequire(import.meta.url);
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const base = process.env.PAGES_URL || 'https://leonwangxl.github.io/Shadowing/';
+const browser = await chromium.launch({ channel: 'msedge', headless: true, args: ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'] });
+try {
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, permissions: ['microphone'] });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto(base);
+  await page.getByRole('heading', { name: '让英语，真正说出口。' }).waitFor();
+  await page.locator('img').evaluate(img => img.decode());
+  assert.ok(await page.locator('img').evaluate(img => img.complete && img.naturalWidth > 0));
+  await page.screenshot({ path: 'qa/pages-live-home.png', fullPage: true });
+  await page.evaluate(() => localStorage.setItem('echo-settings', JSON.stringify({ mode: 'manual', repeat: false, speed: 1 })));
+  await page.getByRole('link', { name: '开始练习', exact: true }).first().click();
+  await page.getByRole('button', { name: '开始跟读', exact: true }).waitFor();
+  assert.equal(new URL(page.url()).pathname, '/Shadowing/practice/');
+  await page.reload();
+  await page.getByRole('button', { name: '开始跟读', exact: true }).click();
+  await page.getByRole('button', { name: '开始录音', exact: true }).waitFor();
+  await page.getByRole('button', { name: '开始录音', exact: true }).click();
+  await page.getByRole('button', { name: /结束录音/ }).waitFor();
+  await page.waitForTimeout(1300);
+  await page.getByRole('button', { name: /结束录音/ }).click();
+  await page.getByRole('link', { name: '下载录音', exact: true }).waitFor();
+  assert.equal(await page.getByRole('link', { name: '下载录音', exact: true }).getAttribute('href').then(value => value.startsWith('blob:')), true);
+  await page.screenshot({ path: 'qa/pages-live-practice.png', fullPage: true });
+  await page.getByRole('button', { name: '导入素材', exact: true }).click();
+  await page.getByText('文章转语音 + 自动生成 SRT', { exact: true }).click();
+  await page.getByLabel('文章内容', { exact: true }).fill('Hello.');
+  assert.equal(await page.getByRole('button', { name: '生成并导入练习' }).isDisabled(), true);
+  await page.getByText('当前 GitHub Pages 在线版不提供语音后端。', { exact: false }).waitFor();
+  assert.deepEqual(errors, []);
+  console.log('Live Pages verified: landing, assets, practice direct/reload, real demo playback, synthetic microphone recording/download, static backend notice.');
+} finally { await browser.close(); }
