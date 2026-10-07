@@ -10,7 +10,7 @@
 
 ## 使用
 
-1. 打开本地预览 `http://127.0.0.1:4173/`。
+1. 打开本地预览 `http://127.0.0.1:4173/`，点击首页的 **开始练习**（或直接访问 `/practice`）。
 2. 可以直接使用内置的 8 句合成英语音频，或点击 **导入素材**，选择视频／音频与 SRT／VTT 字幕。
 3. 选择一句，点击 **开始跟读**，在浏览器提示时允许麦克风。
 4. 默认先听原声，再自动录音；录音后按设置重复。随时点击主按钮结束或停止。
@@ -121,3 +121,13 @@ AZURE_ENABLE_PROSODY=false
 可以下载原文章、生成音频、原 SRT 及编辑后的 SRT；这些文件与素材一起进入回收站。原有分组、重复、自动进句与手动录音继续适用。本地录音最长 5 分钟，云端发音评测仍仅支持英语且限 30 秒，不从合成语音推算发音评分。
 
 本地后端依赖 Python 3.9+：执行 `python -m venv .venv-tts`，Windows 执行 `.venv-tts/Scripts/python.exe -m pip install -r server/requirements-tts.txt`，其他系统使用 `.venv-tts/bin/python`。项目虚拟环境自动识别，可用 `.env` 的 `TTS_PYTHON` 指定运行时。Node 开发、预览和生产服务支持；现有 Sites Worker 不执行 Python，云端生成需要独立语音后端。语音服务变更可能导致生成失败，不影响已保存素材。
+
+### 首页与练习入口
+
+`/` 为 Shadowing 产品首页，点击“开始练习”或“进入练习”进入 `/practice`；练习页左上角品牌可返回首页。首页的导航跳转到练习方式、素材和 FAQ，“查看更多问题”可以展开更多说明。主动调整首页的语速、循环后，进入练习会应用所选设置；未调整时保留已有练习设置。素材与录音仍属于同一网站来源，路径切换不更换存储。首页预览为实际练习截图，点击后进入可操作应用。
+
+### GitHub Pages 在线版
+
+在线地址：https://leonwangxl.github.io/Shadowing/ 。点击“开始练习”进入练习页，也可直接打开 https://leonwangxl.github.io/Shadowing/practice/ 。支持示例、导入音视频与字幕、跟读录音、回听对比、下载和本地保存。GitHub Pages 仅提供静态托管，不执行 Python/Node 后端，因此在线版不提供文章语音生成或 Azure 发音评测；请使用本地完整版。在线版与本地地址属于不同来源，存储互不共享。录音需要用户允许麦克风，建议使用新版 Chrome/Edge。
+
+推送 main 会通过 `.github/workflows/pages.yml` 自动测试、构建并部署。Pages 构建使用 `/Shadowing/` 资源基路径，并生成 `practice/index.html`，支持直接访问与刷新练习页。

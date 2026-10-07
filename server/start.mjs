@@ -10,7 +10,7 @@ const api = assessmentMiddleware();
 const server = http.createServer((req, res) => api(req, res, async () => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-    const file = resolve(root, `.${pathname === '/' ? '/index.html' : pathname}`);
+    const file = resolve(root, `.${['/', '/practice', '/practice/'].includes(pathname) ? '/index.html' : pathname}`);
     if (file !== root && !file.startsWith(root + sep)) { res.writeHead(403); res.end(); return; }
     if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); res.end(); return; }
     const info = await stat(file);

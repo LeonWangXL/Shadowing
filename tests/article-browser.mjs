@@ -7,7 +7,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('http://127.0.0.1:4173/');
+  await page.goto('http://127.0.0.1:4173/practice');
   await page.getByRole('button', { name: '导入素材' }).click();
   await page.getByText('文章转语音 + 自动生成 SRT', { exact: true }).click();
   await page.getByLabel('文章名称', { exact: true }).fill('Article browser QA');

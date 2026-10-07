@@ -5,6 +5,7 @@ import { assessmentMiddleware } from './server/assessment.mjs';
 try { loadEnvFile('.env'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES === "true" ? "/Shadowing/" : "/",
   build: {
     outDir: "dist/client",
   },

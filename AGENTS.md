@@ -2,6 +2,8 @@
 
 The user selected ideation option 1 (Focus Studio), a warm white / forest-green desktop layout with video and active sentence on the left and a sentence transcript on the right. Preserve this direction. The app is a functional personal shadowing trainer, with local media / recordings and optional real pronunciation assessment; never invent pronunciation scores. The user's communication preference is factual, logical analysis without pandering.
 
+The user selected landing page ideation option 2 (2026-10-07): a warm-white, forest-green page with centered Chinese hero, large authentic app preview, four practice steps, side-by-side material and rhythm sections, FAQ and final CTA. Serve the landing at / and the existing trainer at /practice. Landing settings must use supported speeds and carry into practice; preserve real product limits and avoid invented scores or testimonials.
+
 Run the local server yourself and open the preview in the browser available to this environment. Do not give the user server-start instructions when you can run it.
 
 Before making substantial visual changes, use the Product Design plugin's `get-context` skill when the visual source is unclear or no longer matches the current goal. When the user gives durable prototype-specific design feedback, preferences, or decisions, record them in `AGENTS.md`.

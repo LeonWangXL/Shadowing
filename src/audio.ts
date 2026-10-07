@@ -1,3 +1,4 @@
+import { appUrl } from './appUrl.ts';
 export interface CapturedAudio { blob: Blob; duration: number; rms: number; peak: number }
 export interface Recorder { start: () => Promise<void>; finish: () => Promise<CapturedAudio>; dispose: () => void; level: () => number }
 
@@ -34,7 +35,7 @@ export async function createRecorder(acquireStream?: () => Promise<MediaStream>)
   const dispose = () => { active = false; stream.getTracks().forEach(track => track.stop()); source?.disconnect(); capture?.disconnect(); void context.close().catch(() => {}); };
   try {
     await context.resume();
-    await context.audioWorklet.addModule('/capture-worklet.js');
+    await context.audioWorklet.addModule(appUrl('capture-worklet.js'));
     source = context.createMediaStreamSource(stream);
     capture = new AudioWorkletNode(context, 'echo-capture');
     const ready = new Promise<void>((resolve, reject) => {

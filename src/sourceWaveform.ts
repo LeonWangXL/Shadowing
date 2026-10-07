@@ -1,3 +1,4 @@
+import { appUrl } from './appUrl.ts';
 import { seekMedia } from './mediaSeek';
 import { accumulateWaveform } from './waveform';
 
@@ -25,7 +26,7 @@ export async function sourceWaveform(source: string, start: number, end: number,
     const boundedEnd = Number.isFinite(media.duration) ? Math.min(end, media.duration) : end;
     if (start >= boundedEnd) throw new Error('这段字幕没有对应原声，请调整时间轴。');
     if (signal.aborted) throw abortError();
-    await context.audioWorklet.addModule('/waveform-worklet.js');
+    await context.audioWorklet.addModule(appUrl('waveform-worklet.js'));
     if (signal.aborted) throw abortError();
     node = context.createMediaElementSource(media);
     worklet = new AudioWorkletNode(context, 'waveform-energy');

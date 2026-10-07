@@ -1,3 +1,4 @@
+import { appUrl } from './appUrl.ts';
 import { encodeWav } from './audio.ts';
 import { serializeSrt, validateSegments } from './subtitles.ts';
 import type { Lesson, Segment } from './types';
@@ -35,7 +36,7 @@ export async function articleLesson(text: string, title: string, voice: string, 
   try {
     for (let i = 0; i < sentences.length; i++) {
       signal.throwIfAborted(); progress(`正在生成 ${i + 1} / ${sentences.length} 句…`);
-      const response = await fetch('/api/tts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: sentences[i], voice }), signal });
+      const response = await fetch(appUrl('api/tts'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: sentences[i], voice }), signal });
       if (!response.ok) { const body = await response.json().catch(() => null); throw new Error(body?.error || '当前后端不支持文章语音生成，请使用本地 Node 服务。'); }
       const audio = await context.decodeAudioData(await response.arrayBuffer());
       signal.throwIfAborted();
