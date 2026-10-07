@@ -12,6 +12,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 The user needs longer practice: preserve adjustable recording time up to 5 minutes and automatic sentence progression. Longer practice recordings must remain playable and downloadable; clearly distinguish the cloud assessment 30-second limit.
 
+Article imports support pasted text and UTF-8 TXT. Generate speech through third-party edge-tts using Microsoft's online service, then persist actual audio and duration-based SRT before practice. Disclose network submission, retain downloadable original articles, support generation cancellation and avoid partial lessons. This Python-backed feature requires the local Node server; the current Sites Worker does not provide TTS.
+
 SRT imports must not impose a fixed cue-count, text-length or total-duration cap. Paginate long transcripts; retain valid time-axis checks and separate assessment limits.
 
 Imported resources must be downloadable: original media, original subtitle when retained, and the current edited subtitle as SRT. Preserve original filenames and distinguish original from current subtitle.

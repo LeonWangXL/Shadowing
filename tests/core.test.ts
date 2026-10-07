@@ -4,6 +4,14 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { parseSubtitles, parseTimestamp, formatTime, validateSegments, serializeSrt, playableSegment } from '../src/subtitles.ts';
 import { encodeWav } from '../src/audio.ts';
+import { articleSentences } from '../src/article.ts';
+
+test('articles preserve sentences, abbreviations, Chinese and long text without truncation', () => {
+  assert.deepEqual(articleSentences('Dr. Smith walks. Next step!\n第三句话。第四句话！', 'en'), ['Dr. Smith walks.', 'Next step!', '第三句话。', '第四句话！']);
+  const long = 'a'.repeat(4001);
+  assert.equal(articleSentences(long, 'en').join(''), long);
+  assert.throws(() => articleSentences(' \n ', 'en'), /请输入/);
+});
 import { recordingDuration } from '../src/practiceTiming.ts';
 import type { Settings } from '../src/types.ts';
 import { seekMedia } from '../src/mediaSeek.ts';

@@ -3,6 +3,7 @@ export interface Lesson {
   id: string; title: string; kind: 'audio' | 'video'; segments: Segment[];
   media?: Blob; fileName?: string; sourceUrl?: string; demo?: boolean; createdAt: number;
   subtitleFile?: Blob; subtitleFileName?: string;
+  articleFile?: Blob; articleFileName?: string;
   deletedAt?: number;
 }
 export interface WordResult {

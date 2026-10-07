@@ -1,4 +1,5 @@
 import { Buffer } from 'node:buffer';
+import { ttsMiddleware } from './tts.mjs';
 
 export function configured(env = process.env) {
   return Boolean(env.AZURE_SPEECH_KEY && /^[a-z0-9-]{2,40}$/.test(env.AZURE_SPEECH_REGION || ''));
@@ -51,10 +52,12 @@ function json(res, status, body) {
 }
 
 export function assessmentMiddleware(env = process.env) {
+  const tts = ttsMiddleware(env);
   // Bound simultaneous paid-service calls for the personal-use first release.
   let inflight = 0;
   return async (req, res, next) => {
     const pathname = new URL(req.url || '/', 'http://localhost').pathname;
+    if (pathname === '/api/tts') return tts(req, res, next);
     if (!pathname.startsWith('/api/')) return next();
     if (pathname === '/api/health' && req.method === 'GET') return json(res, 200, { configured: configured(env), provider: 'Azure Speech', prosody: env.AZURE_ENABLE_PROSODY === 'true', language: 'en-US' });
     if (pathname !== '/api/assess' || req.method !== 'POST') return json(res, 404, { error: '接口不存在。' });
